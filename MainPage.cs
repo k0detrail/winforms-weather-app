@@ -80,6 +80,7 @@ namespace weather_app
             InitializeComponent();
             InitializeLabels();
             InitializeCards();
+            InitializePeriodWeatherIcons();
             ApiKey = GetApiKey(); // this will pull the api key from App.config
             LoadWeatherData("Midsayap"); // this will load the initial city data
 
@@ -269,6 +270,49 @@ namespace weather_app
 
             favoriteCityCard.Controls.Add(favoriteCityLabel);
             // this.Controls.Add(favoriteCityCard);
+        }
+
+        private void InitializePeriodWeatherIcons()
+        {
+            morningIcon = new PictureBox
+            {
+                Location = new Point(20, 20),
+                Size = new Size(40, 40),
+                SizeMode = PictureBoxSizeMode.StretchImage,
+                BackColor = Color.Transparent
+            };
+            morningIcon.Image = Image.FromFile("./resources/weather-icons/rainy.png");
+            currentWeatherCard.Controls.Add(morningIcon);
+
+            afternoonIcon = new PictureBox
+            {
+                Location = new Point(120, 20),
+                Size = new Size(40, 40),
+                SizeMode = PictureBoxSizeMode.StretchImage,
+                BackColor = Color.Transparent
+            };
+            afternoonIcon.Image = Image.FromFile("./resources/weather-icons/cloudy.png");
+            currentWeatherCard.Controls.Add(afternoonIcon);
+
+            nightIcon = new PictureBox
+            {
+                Location = new Point(220, 20),
+                Size = new Size(40, 40),
+                SizeMode = PictureBoxSizeMode.StretchImage,
+                BackColor = Color.Transparent
+            };
+            nightIcon.Image = Image.FromFile("./resources/weather-icons/thunderstorm.png");
+            currentWeatherCard.Controls.Add(nightIcon);
+
+            midnightIcon = new PictureBox
+            {
+                Location = new Point(320, 20),
+                Size = new Size(40, 40),
+                SizeMode = PictureBoxSizeMode.StretchImage,
+                BackColor = Color.Transparent
+            };
+            midnightIcon.Image = Image.FromFile("./resources/weather-icons/snow.png");
+            currentWeatherCard.Controls.Add(midnightIcon);
         }
 
         private async void LoadWeatherData(string city)
