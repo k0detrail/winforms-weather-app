@@ -140,7 +140,7 @@ namespace weather_app
                 Location = new Point(30, 50),
                 BackColor = Color.White,
                 BorderRadius = 20,
-                BackgroundImage = Image.FromFile("./images/air-quality-bg.jpg"),
+                BackgroundImage = Image.FromFile("./resources/air-quality-bg.jpg"),
                 BackgroundImageLayout = ImageLayout.Stretch
             };
 
@@ -173,7 +173,7 @@ namespace weather_app
                 Location = new Point(30, 270),
                 BackColor = Color.White,
                 BorderRadius = 20,
-                BackgroundImage = Image.FromFile("./images/period-forecast-bg.png"),
+                BackgroundImage = Image.FromFile("./resources/period-forecast-bg.png"),
                 BackgroundImageLayout = ImageLayout.Stretch
             };
 
