@@ -98,18 +98,78 @@ namespace weather_app
         private void InitializeLabels()
         {
             // current weather
-            cityName = new Label();
-            currentTemp = new Label();
-            currentWeatherDesc = new Label();
-            currentFeelsLike = new Label();
-            currentMinTemp = new Label();
-            currentMaxTemp = new Label();
-            currentPressureLabel = new Label();
-            currentPressure = new Label();
-            currentHumidityLabel = new Label();
-            currentHumidity = new Label();
-            sunrise = new Label();
-            sunset = new Label();
+            cityName = new Label
+            {
+                cityName.Location = new System.Drawing.Point(10, 10);
+                cityName.AutoSize = true;
+                cityName.Font = new System.Drawing.Font("Arial", 8, System.Drawing.FontStyle.Bold);
+                cityName.BackColor = Color.Transparent;
+            };
+
+            currentTemp = new Label
+            {
+                currentTemp.Location = new System.Drawing.Point(20, 60);
+                currentTemp.AutoSize = true;
+                currentTemp.Font = new System.Drawing.Font("Arial", 16, System.Drawing.FontStyle.Bold);
+                currentTemp.BackColor = Color.Transparent;
+            };
+
+            currentWeatherDesc = new Label
+            {
+                currentWeatherDesc.Location = new Point(20, 200);
+                currentWeatherDesc.BackColor = Color.Transparent;
+            };
+
+            currentFeelsLike = new Label
+            {
+                currentFeelsLike.Location = new System.Drawing.Point(115, 60);
+                currentFeelsLike.AutoSize = true;
+                currentTemp.BackColor = Color.Transparent;
+            };
+
+            currentMinTemp = new Label
+            {
+                currentMinTemp.BackColor.Transparent;
+            };
+            currentMaxTemp = new Label
+            {
+                currentMaxTemp.BackColor.Transparent;
+            };
+
+            currentPressureLabel = new Label
+            {
+                currentPressureLabel.Text = "Pressure";
+                currentPressureLabel.Location = new Point(20, 150);
+                currentPressureLabel.BackColor.Transparent;
+            };
+
+            currentPressure = new Label
+            {
+                currentPressure.Location = new Point(20, 170);
+                currentPressure.BackColor.Transparent;
+            };
+
+            currentHumidityLabel = new Label
+            {
+                currentHumidityLabel.Text = "Humidity";
+                currentHumidityLabel.Location = new Point(120, 150);
+                currentHumidityLabel.BackColor.Transparent;
+            };
+
+            currentHumidity = new Label
+            {
+                currentHumidity.Location = new Point(120, 170);
+                currentHumidity.BackColor.Transparent;
+            };
+
+            sunrise = new Label
+            {
+                sunrise.BackColor.Transparent;
+            };
+            sunset = new Label
+            {
+                sunset.BackColor.Transparent;
+            };
 
             // period forecast
             morningLabel = new Label();
@@ -125,10 +185,15 @@ namespace weather_app
             midnightTemp = new Label();
             midnightDesc = new Label();
 
-            /*
-            this.Controls.Add(sunrise);
-            this.Controls.Add(sunset);
-            */
+            currentWeatherCard.Controls.Add(cityName);
+            currentWeatherCard.Controls.Add(currentTemp);
+            currentWeatherCard.Controls.Add(currentWeatherDesc);
+            currentWeatherCard.Controls.Add(currentFeelsLike);
+            currentWeatherCard.Controls.Add(currentPressureLabel);
+            currentWeatherCard.Controls.Add(currentPressure);
+            currentWeatherCard.Controls.Add(currentHumidityLabel);
+            currentWeatherCard.Controls.Add(currentHumidity);
+            // currentWeatherCard.Controls.Add(favoriteButton);
         }
 
         private void InitializeCards()
@@ -144,7 +209,6 @@ namespace weather_app
                 BackgroundImageLayout = ImageLayout.Stretch
             };
 
-            currentWeatherCard.Controls.Add(cityName);
             this.Controls.Add(currentWeatherCard);
 
             // init air quality card
@@ -222,58 +286,18 @@ namespace weather_app
                     string currentWeatherJsonResponse = await currentWeatherResponse.Content.ReadAsStringAsync();
                     var currentWeatherData = JsonConvert.DeserializeObject<WeatherData>(currentWeatherJsonResponse);
 
-                    // city name
                     cityName.Text = $"{currentWeatherData.Name}";
-                    cityName.Location = new System.Drawing.Point(10, 10);
-                    cityName.AutoSize = true;
-                    this.cityName.Font = new System.Drawing.Font("Arial", 8, System.Drawing.FontStyle.Bold);
-
-                    // current temp
                     currentTemp.Text = $"{currentWeatherData.Main.Temp}°C"; // current temperature
-                    currentTemp.Location = new System.Drawing.Point(20, 60);
-                    currentTemp.AutoSize = true;
-                    this.currentTemp.Font = new System.Drawing.Font("Arial", 16, System.Drawing.FontStyle.Bold);
-
-                    // current weather description
-                    currentWeatherDesc.Text = $"{currentWeatherData.Weather[0].Description}";
-
-                    // current feels like properties
                     currentFeelsLike.Text = $"{currentWeatherData.Main.FeelsLike}°C"; // feels Like
-                    currentFeelsLike.Location = new System.Drawing.Point(115, 60);
-                    currentFeelsLike.AutoSize = true;
-
-                    // current weather min and max temp
+                    currentWeatherDesc.Text = $"{currentWeatherData.Weather[0].Description}"; // weather description
                     currentMinTemp.Text = $"{currentWeatherData.Main.TempMin}°C"; // minimum temperature
                     currentMaxTemp.Text = $"{currentWeatherData.Main.TempMax}°C"; // maximum temperature
-
-                    // current weather pressure
-                    currentPressureLabel.Text = "Pressure";
                     currentPressure.Text = $"{currentWeatherData.Main.Pressure}hPa"; // pressure
-                    currentPressureLabel.Location = new Point(20, 150);
-                    currentPressure.Location = new Point(20, 170);
-
-                    // current weather humidity
-                    currentHumidityLabel.Text = "Humidity";
                     currentHumidity.Text = $"{currentWeatherData.Main.Humidity}%"; // humidity
-                    currentHumidityLabel.Location = new Point(120, 150);
-                    currentHumidity.Location = new Point(120, 170);
 
-                    // sunrise and sunset
                     // TODO: convert to unix
                     sunrise.Text = $"{currentWeatherData.Sys.Sunrise}";
                     sunrise.Text = $"{currentWeatherData.Sys.Sunset}";
-
-                    currentWeatherCard.Controls.Add(cityName);
-                    currentWeatherCard.Controls.Add(currentTemp);
-                    currentWeatherCard.Controls.Add(currentWeatherDesc);
-                    currentWeatherCard.Controls.Add(currentFeelsLike);
-                    currentWeatherCard.Controls.Add(currentPressureLabel);
-                    currentWeatherCard.Controls.Add(currentPressure);
-                    currentWeatherCard.Controls.Add(currentHumidityLabel);
-                    currentWeatherCard.Controls.Add(currentHumidity);
-                    // currentWeatherCard.Controls.Add(favoriteButton);
-
-                    currentWeatherDesc.Location = new Point(20, 200);
 
                     Button favoriteButton = new Button
                     {
@@ -282,20 +306,6 @@ namespace weather_app
                         Size = new Size(100, 30)
                     };
                     favoriteButton.Click += (sender, e) => AddToFavorites(city, currentWeatherData); // pass city and weather data to the AddToFavorites method
-
-                    // remove the white background color of labels in the current weather card
-                    cityName.BackColor = Color.Transparent;
-                    currentTemp.BackColor = Color.Transparent;
-                    currentWeatherDesc.BackColor = Color.Transparent;
-                    currentFeelsLike.BackColor = Color.Transparent;
-                    currentMinTemp.BackColor = Color.Transparent;
-                    currentMaxTemp.BackColor = Color.Transparent;
-                    currentPressureLabel.BackColor = Color.Transparent;
-                    currentPressure.BackColor = Color.Transparent;
-                    currentHumidityLabel.BackColor = Color.Transparent;
-                    currentHumidity.BackColor = Color.Transparent;
-                    sunrise.BackColor = Color.Transparent;
-                    sunset.BackColor = Color.Transparent;
 
                     // FORECAST DATA
 
@@ -309,7 +319,7 @@ namespace weather_app
                     ForecastItem midnight = GetForecastByTime(forecastData.List, 0); // midnight - 00:00 pm
                     ForecastItem night = GetForecastByTime(forecastData.List, 21); // night - 09:00 pm
 
-                    this.periodForecastLabel.Font = new System.Drawing.Font("Arial", 12, System.Drawing.FontStyle.Bold);
+                    periodForecastLabel.Font = new System.Drawing.Font("Arial", 12, System.Drawing.FontStyle.Bold);
 
                     morningLabel.Text = "Morning";
                     morningTemp.Text = $"{morning.Main.Temp}°C";
@@ -317,7 +327,7 @@ namespace weather_app
                     morningLabel.Location = new Point(20, 50);
                     morningTemp.Location = new Point(20, 75);
                     morningDesc.Location = new Point(20, 95);
-                    this.morningTemp.Font = new Font("Arial", 8, System.Drawing.FontStyle.Bold);
+                    morningTemp.Font = new Font("Arial", 8, System.Drawing.FontStyle.Bold);
 
                     afternoonLabel.Text = "Afternoon";
                     afternoonTemp.Text = $"{afternoon.Main.Temp}°C";
@@ -325,7 +335,7 @@ namespace weather_app
                     afternoonLabel.Location = new Point(120, 50);
                     afternoonTemp.Location = new Point(120, 75);
                     afternoonDesc.Location = new Point(120, 95);
-                    this.afternoonTemp.Font = new Font("Arial", 8, System.Drawing.FontStyle.Bold);
+                    afternoonTemp.Font = new Font("Arial", 8, System.Drawing.FontStyle.Bold);
 
                     nightLabel.Text = "Night";
                     nightTemp.Text = $"{night.Main.Temp}°C";
@@ -333,7 +343,7 @@ namespace weather_app
                     nightLabel.Location = new Point(220, 50);
                     nightTemp.Location = new Point(220, 75);
                     nightDesc.Location = new Point(220, 95);
-                    this.nightTemp.Font = new Font("Arial", 8, System.Drawing.FontStyle.Bold);
+                    nightTemp.Font = new Font("Arial", 8, System.Drawing.FontStyle.Bold);
 
                     midnightLabel.Text = "Midnight";
                     midnightTemp.Text = $"{midnight.Main.Temp}°C";
@@ -341,7 +351,7 @@ namespace weather_app
                     midnightLabel.Location = new Point(320, 50);
                     midnightTemp.Location = new Point(320, 75);
                     midnightDesc.Location = new Point(320, 95);
-                    this.midnightTemp.Font = new Font("Arial", 8, System.Drawing.FontStyle.Bold);
+                    midnightTemp.Font = new Font("Arial", 8, System.Drawing.FontStyle.Bold);
 
                     // reset the background of period forecast labels
                     periodForecastLabel.BackColor = Color.Transparent;
